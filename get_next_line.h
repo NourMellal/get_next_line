@@ -6,7 +6,7 @@
 /*   By: nmellal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:54:14 by nmellal           #+#    #+#             */
-/*   Updated: 2023/12/13 23:15:12 by nmellal          ###   ########.fr       */
+/*   Updated: 2023/12/13 23:22:04 by nmellal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
-# define BUFFER_SIZE 5
+# define BUFFER_SIZE 42
 
 size_t	ft_strlen(char *str);
 char	*destalloc(char *str);

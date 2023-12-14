@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmellal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:01:35 by nmellal           #+#    #+#             */
-/*   Updated: 2023/12/14 15:13:17 by nmellal          ###   ########.fr       */
+/*   Updated: 2023/12/14 15:12:52 by nmellal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*return_and_free(size_t len, char *buffer, char *str)
 {
@@ -100,33 +100,40 @@ char	*go_to_next_line(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[2048];
 	char		*res;
 	ssize_t		len;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	len = 1;
-	buffer = readline(fd, buffer, len);
-	if (!buffer)
+	buffer[fd] = readline(fd, buffer[fd], len);
+	if (!buffer[fd])
 		return (NULL);
-	res = process_line(buffer);
-	buffer = go_to_next_line(buffer);
+	res = process_line(buffer[fd]);
+	buffer[fd] = go_to_next_line(buffer[fd]);
 	return (res);
 }
 
 // int	main(void)
 // {
-// 	int		filed;
+// 	int		fd1;
+// 	int fd2;
 // 	char	*s;
+// 	char *s2;
 
-// 	filed = open("aden.txt", O_RDWR);
-// 	s = get_next_line(filed);
-// 	while (s)
+// 	fd1 = open("aden.txt", O_RDWR);
+// 	fd2 = open("nour.txt", O_RDWR);
+// 	s = get_next_line(fd1);
+// 	s2 = get_next_line(0);
+// 	while (s || s2)
 // 	{
 // 		printf("%s\n", s);
+// 		printf("%s\n", s2);
 // 		free(s);
-// 		s = get_next_line(filed);
+// 		free(s2);
+// 		s = get_next_line(fd1);
+// 		s2 = get_next_line(0);
 // 		sleep(2);
 // 	}
 // 	return (0);
